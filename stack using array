@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Stack{
+    int size;
+    vector<int> buffer;
+    int top = -1;
+    bool isEmpty = true;
+    bool isFull = false;
+
+public:
+    Stack(int size){
+        this->size = size;
+        buffer.resize(size);
+    }
+
+public:
+    void push(int item){
+        if (top >= size - 1){
+            cout << "stack overflowed" << endl;
+        }
+        else{
+            top += 1;
+            buffer[top] = item;
+        }
+    }
+
+public:
+    void pop(){
+        if (top <= -1){
+            cout << "stack underflowed" << endl;
+        }
+        else{
+            top -= 1;
+        }
+    }
+
+public:
+    void print(){
+        for (int i = 0; i <= top; i++){
+            cout << buffer[i] << " ";
+        }
+    }
+};
+
+int main(){
+    Stack stack(4);
+    stack.push(8);
+    stack.push(2);
+    stack.push(7);
+    stack.push(1);
+    stack.pop();
+    stack.push(9);
+
+    stack.print();
+    return 0;
+}
