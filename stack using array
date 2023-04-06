@@ -1,0 +1,93 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+
+class Stack{
+    int size;
+    vector<int> buffer;
+    int top = -1;
+    bool isEmpty = true;
+    bool isFull = false;
+
+public:
+    Stack(int size){
+        this->size = size;
+        buffer.resize(size);
+    }
+
+public:
+    void push(int item){
+        if (top >= size - 1){
+            cout << "stack overflow" << endl;
+        }
+        else{
+            top += 1;
+            buffer[top] = item;
+        }
+    }
+
+public:
+    void pop(){
+        if (top <= -1){
+            cout << "stack underflow" << endl;
+        }
+        else{
+            top -= 1;
+        }
+    }
+
+public:
+    void display(){
+        if (top <= -1){
+            cout << "Stack is empty" << endl;
+        }
+        else{
+            cout << "Elements in the stack are: ";
+            for (int i = 0; i <= top; i++){
+                cout << buffer[i] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    auto start = chrono::high_resolution_clock::now();
+
+    Stack stack(10);
+    stack.push(8);
+    stack.push(10);
+    stack.push(5);
+    stack.push(11);
+    stack.push(15);
+    stack.push(23);
+    stack.push(6);
+    stack.push(18);
+    stack.push(20);
+    stack.push(17);
+
+    stack.display();
+
+    for (int i = 0; i < 5; i++) {
+        stack.pop();
+    }
+
+    stack.display();
+
+    stack.push(4);
+    stack.push(30);
+    stack.push(3);
+    stack.push(1);
+
+    stack.display();
+
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    cout << "Time taken for implement stack using linked list : " << duration.count() << " microseconds" << endl;
+
+    return 0;
+}
+
+
